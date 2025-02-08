@@ -1,4 +1,16 @@
 public class TreeNodeUse {
+    public static void printTree(TreeNode<Integer> root) {
+
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data  + " ");
+        for (int i = 0; i < root.children.size(); i++) {
+            TreeNode<Integer> childNode = root.children.get(i);
+            printTree(childNode);
+        }
+    }
+
     public static void main(String[] args) {
         TreeNode<Integer> rooTreeNode = new TreeNode<Integer>(10);
         TreeNode<Integer> n1TreeNode = new TreeNode<Integer>(20);
@@ -14,6 +26,8 @@ public class TreeNodeUse {
         n1TreeNode.children.add(n4TreeNode);
         n2TreeNode.children.add(n6TreeNode);
         n2TreeNode.children.add(n5TreeNode);
-        
+
+        printTree(rooTreeNode);
+
     }
 }
