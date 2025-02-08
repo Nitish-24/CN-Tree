@@ -1,5 +1,19 @@
 public class TreeNodeUse {
 
+    public static int NodeCount(TreeNode<Integer>root){
+        if (root==null) {
+            return 0;
+        }
+        int count =1;
+
+        for (int i = 0; i < root.children.size(); i++) {
+            int childCount = NodeCount(root.children.get(i));
+            count+=childCount;
+            
+        }
+        return count;
+    }
+
     public static void optimisedPrintTree(TreeNode<Integer> root) {
 
         if (root == null) {
@@ -48,6 +62,6 @@ public class TreeNodeUse {
         printTree(rooTreeNode);
         System.out.println();
         optimisedPrintTree(rooTreeNode);
-
+         System.out.println(NodeCount(rooTreeNode));
     }
 }
