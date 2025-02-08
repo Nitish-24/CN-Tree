@@ -1,10 +1,28 @@
 public class TreeNodeUse {
+
+    public static void optimisedPrintTree(TreeNode<Integer> root) {
+
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + ": ");
+
+        for (int i = 0; i < root.children.size(); i++) {
+            System.out.print(root.children.get(i).data+" ");
+        }
+        System.out.println();
+        for (int i = 0; i < root.children.size(); i++) {
+            TreeNode<Integer> childNode = root.children.get(i);
+            optimisedPrintTree(childNode);
+        }
+    }
+
     public static void printTree(TreeNode<Integer> root) {
 
         if (root == null) {
             return;
         }
-        System.out.print(root.data  + " ");
+        System.out.print(root.data + " ");
         for (int i = 0; i < root.children.size(); i++) {
             TreeNode<Integer> childNode = root.children.get(i);
             printTree(childNode);
@@ -28,6 +46,8 @@ public class TreeNodeUse {
         n2TreeNode.children.add(n5TreeNode);
 
         printTree(rooTreeNode);
+        System.out.println();
+        optimisedPrintTree(rooTreeNode);
 
     }
 }
