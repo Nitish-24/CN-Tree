@@ -1,8 +1,72 @@
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
+
 
 public class TreeNodeUse {
+
+    public static TreeNode<Integer> maxSumNode(TreeNode<Integer> root){
+		if (root ==null) {
+            return null;
+        }
+        TreeNode<Integer> nodeMaxNode = root;
+        int maxsum = clacSum(root);
+        
+               
+                Queue<TreeNode<Integer>> queue = new LinkedList<>();
+                queue.add(root);
+        
+                while (!queue.isEmpty()) {
+                    TreeNode<Integer> currentNode = queue.poll();
+        
+                    int currentSum = clacSum(currentNode);
+        
+                    
+                    if (currentSum > maxsum) {
+                        maxsum = currentSum;
+                        nodeMaxNode = currentNode;
+                    }
+        
+                    queue.addAll(currentNode.children);
+                }
+        
+                return nodeMaxNode;
+            }
+            
+        
+            private static int clacSum(TreeNode<Integer> root) {
+                if (root == null) {
+                    return 0;
+                }
+                int sum = root.data; 
+                for (TreeNode<Integer> child : root.children) {
+                    sum += child.data; 
+                }
+                return sum;
+            }
+        
+        
+            public static void printPostOrder(TreeNode<Integer> root){
+		if (root==null) {
+            return;
+        }
+
+        Stack<Integer>stack = new Stack<>();
+        Queue<TreeNode<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode<Integer> currNode = queue.poll();
+             stack.push(currNode.data);
+            for (int i = currNode.children.size()-1; i >=0; i--) {
+                queue.add(currNode.children.get(i));
+            }
+        }
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop()+" ");
+        }
+	}
+
 
     public static int getHeight(TreeNode<Integer> root) {
         int height = 0;
@@ -50,6 +114,7 @@ public class TreeNodeUse {
         return count;
     }
 
+    @SuppressWarnings("resource")
     public static TreeNode<Integer> takeInput() {
         Scanner scn = new Scanner(System.in);
         Queue<TreeNode<Integer>> pendingQueue = new LinkedList<>();
